@@ -1,0 +1,19 @@
+{
+  "name": "bozerkins/bachelors-thesis-practical",
+  "description": "simple data analysis infrastructure",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bogdans Ozerkins",
+      "email": "b.ozerkins@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Application\\": "src/"}
+  },
+  "require": {
+    "fzaninotto/faker": "v1.6.0",
+    "symfony/var-dumper": "v2.8.6"
+  }
+}
