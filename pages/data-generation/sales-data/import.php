@@ -62,7 +62,7 @@ foreach($fromDates as $fromDate) {
                 $purchaseDays = rand($reservationDays, $days->days);
                 $product['reservation_date'] = date('Y-m-d', strtotime($salary['from_date'] . ' +' . $reservationDays . 'days'));
                 $product['purchase_date'] = date('Y-m-d', strtotime($salary['from_date'] . ' +' . $purchaseDays . 'days'));
-                $key = date('Y', strtotime($salary['from_date']));
+                $key = date('Y_m_d', strtotime($salary['from_date']));
                 if (!array_key_exists($key, $sales)) {
                     $sales[$key] = array();
                 }
@@ -72,8 +72,8 @@ foreach($fromDates as $fromDate) {
     }
 
     // import sales
-    foreach($sales as $year => $data) {
-        $file = $dir . '/sales_' . $year . '.csv';
+    foreach($sales as $ymd => $data) {
+        $file = $dir . '/sales_' . $ymd . '.csv';
 
         dump('starting processing: ' . $file);
 
