@@ -11,5 +11,8 @@ namespace Application\Processing;
 
 interface DataExportInterface
 {
-
+    /**
+     * @param array $output
+     */
+    public function export(array $output);
 }

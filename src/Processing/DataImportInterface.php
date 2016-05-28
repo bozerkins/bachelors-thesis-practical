@@ -11,5 +11,9 @@ namespace Application\Processing;
 
 interface DataImportInterface
 {
-
+    /**
+     * @param array $condition
+     * @return array $input
+     */
+    public function import(array $condition);
 }

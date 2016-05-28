@@ -11,12 +11,13 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 $connection = \Application\Database::getInstance()->getConnection();
 
 $processingManager = new \Application\Processing\ProcessingManager();
-$processingManager->setDataImport(new \Application\Processing\Employee\DataImport());
-$processingManager->setDataParser(new \Application\Processing\Employee\DataParser());
-$processingManager->setDataExport(new \Application\Processing\Employee\DataExport());
+$processingManager->setDataImport(new \Application\Processing\Stages\Employee\DataImport());
+$processingManager->setDataParser(new \Application\Processing\Stages\Employee\DataParser());
+$processingManager->setDataExport(new \Application\Processing\Stages\Employee\DataExport());
 
 // process employees
-$employeeIds = $connection->query("SELECT emp_no FROM raw_employees");
-foreach($employeeIds as $employeeId) {
-    $processingManager->execute(array('emp_no' => $employeeId));
+$employees = $connection->query("SELECT emp_no FROM raw_employees");
+foreach($employees as $employee) {
+    $processingManager->execute($employee);
+    $connection->query("DELETE FROM raw_employees WHERE emp_no = {$employee['emp_no']} LIMIT 1");
 }

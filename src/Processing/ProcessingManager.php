@@ -68,7 +68,9 @@ class ProcessingManager
      */
     public function execute(array $where)
     {
-
+        $input = $this->getDataImport()->import($where);
+        $output = $this->getDataParser()->parse($input);
+        $this->getDataExport()->export($output);
     }
 
 }

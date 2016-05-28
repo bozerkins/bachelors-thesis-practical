@@ -44,8 +44,11 @@ class Database
 
     }
 
-    public function getConnection()
+    public function getConnection($name = null)
     {
+        if ($name) {
+            $this->switchConnection($name);
+        }
         if ($this->connection === null) {
             $this->switchConnection('bachelors_analytics');
         }

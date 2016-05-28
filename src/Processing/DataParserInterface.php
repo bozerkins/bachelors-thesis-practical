@@ -11,5 +11,9 @@ namespace Application\Processing;
 
 interface DataParserInterface
 {
-
+    /**
+     * @param array $input
+     * @return array $output
+     */
+    public function parse(array $input);
 }
