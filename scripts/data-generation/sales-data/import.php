@@ -62,7 +62,7 @@ foreach($fromDates as $fromDate) {
                 $purchaseDays = rand($reservationDays, $days->days);
                 $product['reservation_date'] = date('Y-m-d', strtotime($salary['from_date'] . ' +' . $reservationDays . 'days'));
                 $product['purchase_date'] = date('Y-m-d', strtotime($salary['from_date'] . ' +' . $purchaseDays . 'days'));
-                $key = date('Y_m_d', strtotime($salary['from_date']));
+                $key = $product['purchase_date'];
                 if (!array_key_exists($key, $sales)) {
                     $sales[$key] = array();
                 }
