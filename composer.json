@@ -14,6 +14,7 @@
   },
   "require": {
     "fzaninotto/faker": "v1.6.0",
-    "symfony/var-dumper": "v2.8.6"
+    "symfony/var-dumper": "v2.8.6",
+    "rg/avro-php": "v1.8.0"
   }
 }
