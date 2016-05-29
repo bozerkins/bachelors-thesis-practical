@@ -19,12 +19,18 @@ $connection = \Application\Database::getInstance()->getConnection();
 $data = $connection->query("
 	SELECT SQL_NO_CACHE
       dim_date.month as `Month`,
-      COUNT(*) as `Amount`
-	FROM fact_products
+      dim_city.city_name as `City`,
+      AVG(price) as `Average Price`,
+      AVG(markup) as `Average Markup`,
+      COUNT(*) / COUNT(DISTINCT(emp_no)) as `Products per Employee`,
+      COUNT(*) as `Products`
+	FROM fact_det_products
 	JOIN dim_date
-		ON fact_products.dim_purchase_key = dim_date.date
+		ON fact_det_products.dim_purchase_key = dim_date.date
+	JOIN dim_city
+		ON fact_det_products.dim_city_key = dim_city.id
 	WHERE dim_date.date BETWEEN '{$dateFrom}' AND '{$dateTo}'
-	GROUP BY dim_date.month
+	GROUP BY dim_date.month, dim_city.city_name
 	{$sortSql}
 ")->fetchAll();
 
