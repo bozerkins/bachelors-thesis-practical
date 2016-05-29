@@ -7,6 +7,10 @@ $counter = array();
 while (($row = fgetcsv(STDIN)) !== false) {
     $row = array_map('trim', $row);
 
+    // fix for dev testing
+    if (count($row) < 2) {
+        continue;
+    }
     $key = $row[0];
     if (!array_key_exists($key, $counter)) {
         $counter[$key] = $visitors[$key] = array();

@@ -13,7 +13,7 @@ $statement = $connection->prepare("INSERT IGNORE INTO dim_date
             (`date`, `month`, `month_name`, `year`, `year_month`, `day_of_week_name`)
             VALUES (:date, :month, :month_name, :year, :year_month, :day_of_week_name)");
 
-for($date = '1885-01-01'; $date <= '2016-01-01'; $date = date('Y-m-d', strtotime($date . ' +1day'))) {
+for($date = '1885-01-01'; $date <= date('Y-m-d', strtotime('next year')); $date = date('Y-m-d', strtotime($date . ' +1day'))) {
     $record = array();
     $unix = strtotime($date);
     $record['date'] = $date;

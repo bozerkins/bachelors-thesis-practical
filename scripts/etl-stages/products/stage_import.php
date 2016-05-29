@@ -39,6 +39,9 @@ foreach($dir as $folder) {
     $statement = $connection->prepare("INSERT INTO raw_products
             (emp_no,markup,price_net,price,client_city,client_country,client_email,client_company_email,reservation_date,purchase_date)
             VALUES (:emp_no,:markup,:price_net,:price,:client_city,:client_country,:client_email,:client_company_email,:reservation_date,:purchase_date)");
+    $statement_error = $connection->prepare("INSERT INTO raw_products_errors
+            (emp_no,markup,price_net,price,client_city,client_country,client_email,client_company_email,reservation_date,purchase_date)
+            VALUES (:emp_no,:markup,:price_net,:price,:client_city,:client_country,:client_email,:client_company_email,:reservation_date,:purchase_date)");
 
     if (($handle = fopen($importDir . '/' . $folder, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -54,7 +57,16 @@ foreach($dir as $folder) {
             $product['client_company_email'] = $data[7];
             $product['reservation_date'] = $data[8];
             $product['purchase_date'] = $data[9];
-            $statement->execute($product);
+
+            // validation
+            if (!$product['emp_no'] || !$product['purchase_date'] || !$product['price'] || !$product['price_net']) {
+                // error record
+                $statement_error->execute($product);
+            } else {
+                // true record
+                $statement->execute($product);
+            }
+
             if ($counter % 500 === 0) {
                 dump('imported rows: ' . $counter);
             }

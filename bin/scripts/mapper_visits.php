@@ -3,6 +3,10 @@
 
 // input comes from STDIN (standard input)
 while (($row = fgetcsv(STDIN)) !== false) {
+    // fix for dev testing
+    if (count($row) < 2) {
+        continue;
+    }
     $record = array();
     $record['visit_id'] = $row[0];
     $record['visitor_id'] = $row[1];
