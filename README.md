@@ -1,4 +1,4 @@
-# bachelors-thesis-practical
+# Bachelors Thesis Practical
 
 how to generate source data
 
